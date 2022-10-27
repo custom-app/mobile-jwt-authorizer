@@ -10,17 +10,17 @@ const (
 	port = 9990
 )
 
-func InitServer() {
+func InitServer(connStr string) {
 	http.HandleFunc("/api/register", handleRegister)
 	http.HandleFunc("/api/login", handleLogin)
 	http.HandleFunc("/api/refresh_tokens", handleRefreshTokens)
 	http.HandleFunc("/api/get_devs", handleGetDevs)
 	fmt.Println("initiating db")
-	if err := initDB(); err != nil {
+	if err := initDB(connStr); err != nil {
 		panic(err)
 	}
 	fmt.Println("starting server on " + strconv.Itoa(port) + " port")
-	err := http.ListenAndServe(":" + strconv.Itoa(port), nil)
+	err := http.ListenAndServe(":"+strconv.Itoa(port), nil)
 	if err != nil {
 		panic(err)
 	}

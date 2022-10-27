@@ -7,13 +7,9 @@ import (
 	_ "github.com/lib/pq"
 )
 
-const (
-	connStr = "user=penachett password=samplesapp908365 dbname=jwt_sample sslmode=disable"
-)
-
 var db *sql.DB
 
-func initDB() error {
+func initDB(connStr string) error {
 	for i := 0; i < 5; i++ {
 		var err error
 		db, err = sql.Open("postgres", connStr)

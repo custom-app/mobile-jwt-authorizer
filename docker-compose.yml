@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  lev-service:
+    image: lev-service:latest
+    ports:
+      - "9100:9990"
+    restart: unless-stopped
+    depends_on:
+      - lev-postgres
+  lev-postgres:
+    image: postgres:13
+    volumes:
+      - lev-postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    restart: unless-stopped
+
+volumes:
+  lev-postgres-data:
