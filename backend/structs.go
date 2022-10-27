@@ -35,6 +35,7 @@ type authBody struct {
 }
 
 type developer struct {
+    Id int64 `json:"id"`
 	Name string `json:"name"`
 	Department string `json:"department"`
 }
