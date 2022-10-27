@@ -9,7 +9,7 @@ jobs:
     runs-on: [ self-hosted, main ]
     steps:
       - uses: actions/checkout@v3
-        name: Build backend
+      - name: Build backend
         run: docker build -t lev-service:latest backend/
       - name: Up backend
         run: docker-compose -f docker-compose.yml up -d lev-service
