@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject
+    var mainVm = MainViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            if mainVm.showAuthContainer {
+                LoginScreen()
+            } else {
+                DevsScreen()
+            }
         }
-        .padding()
+        .background(Color.white.ignoresSafeArea())
+        .navigationViewStyle(StackNavigationViewStyle())
+        .environmentObject(mainVm)
+        .navigationBarTitle("", displayMode: .inline)
+        .preferredColorScheme(.light)
     }
 }
 
