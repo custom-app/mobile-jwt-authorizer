@@ -19,11 +19,12 @@ struct DevsScreen: View {
                 ZStack {
                     VStack(spacing: 0) {
                         ScrollView {
-                            LazyVStack(spacing: 12) {
+                            LazyVStack(spacing: 16) {
                                 ForEach(mainVm.developers, id: \.id) { dev in
                                     DeveloperCard(developer: dev)
                                 }
                             }
+                            .padding(.vertical, 14)
                         }
                     }
                     VStack {
@@ -41,6 +42,7 @@ struct DevsScreen: View {
                                 .background(Circle().fill(Color.black))
                                 .padding(.bottom, 20)
                         }
+                        .opacity(0.9)
                     }
                 }
             case .error:
@@ -94,10 +96,45 @@ struct DeveloperCard: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            Text(developer.name)
+            Image("logo_customapp")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80, height: 40)
+                .padding(10)
+                .background(Color.black)
+                .cornerRadius(8)
+            Spacer()
+            VStack(spacing: 14) {
+                Text(developer.name)
+                    .fontWeight(.bold)
+                Text(developer.department)
+                    .fontWeight(.bold)
+                    .foregroundColor(departmentColor)
+            }
+            Spacer()
         }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 12)
+        .background(Color.white)
+        .cornerRadius(8)
+        .shadow(radius: 4)
+        .padding(.horizontal, 20)
     }
     
+    var departmentColor: Color {
+        switch developer.department {
+        case "Backend":
+            return .teal
+        case "Frontend":
+            return .orange
+        case "Mobile":
+            return .indigo
+        case "Design":
+            return .red
+        default:
+            return .black
+        }
+    }
 }
 
 struct DevsScreen_Previews: PreviewProvider {

@@ -19,16 +19,21 @@ struct LoginScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Spacer()
+            Image("logo_customapp_fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 240, height: 135)
+                .padding(.top, 60)
             VStack(spacing: 0) {
                 Text("Sign in")
                     .foregroundColor(.black)
+                    .fontWeight(.bold)
                 HStack {
                     Text("Login")
                         .foregroundColor(.black)
                     Spacer()
                 }
-                .padding(.top, 20)
+                .padding(.top, 12)
                 
                 TextField("", text: $login.animation())
                     .foregroundColor(.black)
@@ -37,7 +42,8 @@ struct LoginScreen: View {
                     .padding(.horizontal, 10)
                     .cornerRadius(10)
                     .overlay(RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 1))
+                                .stroke(.black, lineWidth: 1)
+                                .opacity(0.5))
                     .padding(.top, 4)
                     
                 
@@ -46,7 +52,7 @@ struct LoginScreen: View {
                         .foregroundColor(.black)
                     Spacer()
                 }
-                .padding(.top, 10)
+                .padding(.top, 12)
                 SecureField("", text: $password)
                     .foregroundColor(.black)
                     .font(Font.custom("montserrat-medium", size: 17))
@@ -55,7 +61,8 @@ struct LoginScreen: View {
                     .padding(.horizontal, 10)
                     .cornerRadius(10)
                     .overlay(RoundedRectangle(cornerRadius: 10)
-                                .stroke(.black, lineWidth: 1))
+                                .stroke(.black, lineWidth: 1)
+                                .opacity(0.5))
                     .padding(.top, 4)
                 
                 if mainVm.loginPending {
@@ -94,16 +101,18 @@ struct LoginScreen: View {
                 }
                 
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
             .padding(.top, 8)
             .padding(.bottom, 16)
             .background(Color.white)
             .cornerRadius(8)
             .shadow(radius: 4)
-            .padding(.horizontal, 24)
+            .padding(.horizontal, 40)
+            .padding(.top, 80)
             
             NavigationLink(destination: RegisterScreen()) {
                 Text("Register")
+                    .fontWeight(.bold)
             }
             .padding(.top, 12)
             
