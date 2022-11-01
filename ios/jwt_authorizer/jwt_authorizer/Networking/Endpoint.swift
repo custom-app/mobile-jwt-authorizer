@@ -32,5 +32,4 @@ enum Endpoint {
     var absoluteURL: URL {
         URL(string: Endpoint.baseURL + self.path())!
     }
-    
 }

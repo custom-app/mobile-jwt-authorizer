@@ -15,6 +15,8 @@ class Requester {
     private var accessToken = UserDefaultsWorker.shared.getAccessToken()
     private var refreshToken = UserDefaultsWorker.shared.getRefreshToken()
     
+    private init() {}
+    
     private func onTokensRefreshed(tokens: TokensInfo) {
         UserDefaultsWorker.shared.saveAuthTokens(tokens: tokens)
         accessToken = TokenInfo(token: tokens.accessToken, expiresAt: tokens.accessTokenExpire)
@@ -39,8 +41,6 @@ class Requester {
         request.httpMethod = method
         request.addValue(contentType, forHTTPHeaderField: "Content-Type")
         request.httpBody = data
-        let defaults = UserDefaultsWorker()
-        let urlStr = url.absoluteString
         if refreshTokens {
             request.addValue("Bearer \(refreshToken.token)", forHTTPHeaderField: "Authorization")
         } else if !accessToken.token.isEmpty && !ignoreJwtAuth {
@@ -83,7 +83,6 @@ class Requester {
         self.doRequest(request: request) { [self] result in
             self.handleAuthResponse(response: result, onResult: onResult)
         }
-//        self.doRequest(request: request, onResult: onResult)
     }
     
     func getDevelopers(onResult: @escaping (Result<[Developer]>) -> Void) {
